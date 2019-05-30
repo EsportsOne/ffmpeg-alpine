@@ -10,6 +10,9 @@ ENV FFMPEG_CORE="bash \
                  libstdc++ \
                  libpng \
                  libjpeg \
+                 xvidcore \
+                 x264-libs \
+                 x265 \
                  libvpx \
                  libvorbis \
                  opus \
@@ -33,12 +36,15 @@ ENV RUNTIME_DEPS="coreutils \
 
 ENV BUILD_DEPS="fdk-aac-dev \
                 freetype-dev \
+                x264-dev \
+                x265-dev \
                 yasm-dev \
                 libogg-dev \
                 libvorbis-dev \
                 opus-dev \
                 libvpx-dev \
                 lame-dev \
+                xvidcore-dev \
                 libass-dev \
                 libressl-dev \
                 musl-dev \
@@ -72,12 +78,17 @@ RUN apk update && \
         --enable-version3 \
         --enable-libmp3lame \
         --enable-pthreads \
+        --enable-libx264 \
+        --enable-libxvid \
+        --enable-gpl \
         --enable-postproc \
+        --enable-nonfree \
         --enable-avresample \
         --enable-libfdk-aac \
         --disable-debug \
         --enable-small \
         --enable-libtls \
+        --enable-libx265 \
         --enable-libopus \
         --enable-libvorbis \
         --enable-libvpx \
