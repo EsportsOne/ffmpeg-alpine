@@ -1,0 +1,19 @@
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@6.1.0
+jobs:
+  ci:
+    machine: true
+    steps:
+      - aws-ecr/ecr-login
+      - aws-ecr/build-and-push-image:
+          dockerfile: ./custom/golang/Dockerfile
+          account-url: ECR_URL
+          repo: esportsone/ffmpeg-alpine
+          tag: ${CIRCLE_SHA1}-golang
+workflows:
+  version: 2
+  ci-cd:
+    jobs:
+      - ci:
+          context: ecr-staging
